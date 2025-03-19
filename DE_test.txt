@@ -1,0 +1,14 @@
+1) 
+Please find the solution in the .sql file
+
+The idea of the query is to run a recursive CTE where the base case is the step with no dependency (or step_dep_id 0) and recursively find the step_seq_id that corresponds to it. This would give the sequence that steps should run accordingly.
+
+2) 
+Gaps/Dependency issues:
+
+- Circular and Data Integrity Issues: The data may contain circular dependencies, which can cause the query to fail due to memory exhaustion or incorrect results. To solve this, validate that STEP_DEP_ID always refers to a valid STEP_SEQ_ID to maintain consistent and reliable relationships.
+
+- Performance and Scalability Issues: Recursive queries may be unsuitable for production due to deep recursion chains that can consume heavy resources, leading to slow query performance, timeouts, and difficulties in scaling as the dataset grows.
+
+3) 
+The solution provided is robust as the rows can be in any order and the query will still be able to reorder the steps based on their dependencies, ensuring the steps are processed in the correct sequence regardless of the original order in the table. 
